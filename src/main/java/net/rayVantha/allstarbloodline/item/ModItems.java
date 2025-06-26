@@ -1,8 +1,11 @@
 package net.rayVantha.allstarbloodline.item;
 
-import net.minecraft.world.item.ArrowItem;
+// Eliminar la importación de ArrowItem si StandArrowItem la reemplaza completamente
+// import net.minecraft.world.item.ArrowItem;
 import net.minecraft.world.item.Item;
 import net.minecraftforge.eventbus.api.IEventBus;
+// Añadir la importación de StandArrowItem
+import net.rayVantha.allstarbloodline.item.StandArrowItem;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
@@ -13,7 +16,7 @@ public class ModItems {
             DeferredRegister.create(ForgeRegistries.ITEMS, AllStarBloodline.MOD_ID);
 
     public static final RegistryObject<Item> STANDARROW = ITEMS.register("standarrow",
-        () -> new ArrowItem(new Item.Properties()));
+        () -> new StandArrowItem(new Item.Properties())); // Usar StandArrowItem en lugar de ArrowItem
 
 
 
