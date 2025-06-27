@@ -14,10 +14,8 @@ import net.minecraftforge.fml.config.ModConfig;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
-import net.minecraftforge.client.event.EntityRenderersEvent; // Importación añadida
-import net.rayVantha.allstarbloodline.client.renderer.entity.StandArrowRenderer; // Importación añadida
-import net.rayVantha.allstarbloodline.entity.ModEntities;
-import net.rayVantha.allstarbloodline.item.ModItems;
+import net.minecraftforge.client.event.EntityRenderersEvent;
+import net.rayVantha.allstarbloodline.ModItems;
 import org.slf4j.Logger;
 
 // The value here should match an entry in the META-INF/mods.toml file
@@ -35,7 +33,6 @@ public class AllStarBloodline {
         MinecraftForge.EVENT_BUS.register(this);
 
         ModItems.register(modEventBus);
-        ModEntities.register(modEventBus); // Añadir esta línea
 
         // Register the item to a creative tab
         modEventBus.addListener(this::addCreative);
@@ -68,12 +65,6 @@ public class AllStarBloodline {
             // Aquí es un buen lugar para registrar renderers de entidades,
             // pero para Forge 1.18+ es mejor usar EntityRenderersEvent.RegisterRenderers
         }
-
-        // Las importaciones específicas para ModEntities y StandArrowRenderer ya están arriba a nivel de clase.
-        // Solo necesitamos la importación para EntityRenderersEvent aquí si no está ya.
-        @SubscribeEvent
-        public static void registerEntityRenderers(EntityRenderersEvent.RegisterRenderers event) { // Tipo de evento simplificado
-            event.registerEntityRenderer(ModEntities.STAND_ARROW_ENTITY.get(), StandArrowRenderer::new); // Nombres de clase simplificados
         }
     }
-}
+
