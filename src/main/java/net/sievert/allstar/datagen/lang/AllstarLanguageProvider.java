@@ -25,9 +25,13 @@ public class AllstarLanguageProvider extends LanguageProvider {
     @Override
     protected void addTranslations() {
 
+        /*
 
+        //Simple flipped entries
+        addManualFlipped(AllstarItems.ExampleItem);
 
-        //Add rest using normal translation convention
+        */
+
         addMissingRegistryTranslations(
                 AllstarItems.class,
                 "item",
@@ -42,16 +46,7 @@ public class AllstarLanguageProvider extends LanguageProvider {
 
         addManual("death.attack.stand_arrow_fail", "%1$s's soul was rejected by the Stand Arrow.");
 
-        /*
-
-        //Simple flipped entries
-        addManualFlipped(AllstarItems.ExampleItem);
-
-        */
-
     }
-
-    //Helpers
 
     private void addManual(Object thing, String value) {
         String key = resolveKey(thing);
@@ -67,10 +62,8 @@ public class AllstarLanguageProvider extends LanguageProvider {
     }
 
     private String resolveKey(Object thing) {
-        // Use string directly
         if (thing instanceof String str) return str;
 
-        // DeferredHolder (NeoForge-style registry object)
         if (thing instanceof DeferredHolder<?, ?> deferred) {
             var resourceKey = deferred.getKey();
             return resourceKey.registry().getPath() + "." +
@@ -78,14 +71,12 @@ public class AllstarLanguageProvider extends LanguageProvider {
                     resourceKey.location().getPath();
         }
 
-        // Fallback for objects with a get() method
         try {
             var getMethod = thing.getClass().getMethod("get");
             Object actual = getMethod.invoke(thing);
             if (actual != null && actual != thing) return resolveKey(actual);
         } catch (Exception ignored) {}
 
-        // Fallback for vanilla items
         if (thing instanceof Item item) {
             ResourceLocation id = BuiltInRegistries.ITEM.getKey(item);
             return "item." + id.getNamespace() + "." + id.getPath();
@@ -93,8 +84,6 @@ public class AllstarLanguageProvider extends LanguageProvider {
 
         throw new IllegalArgumentException("Unsupported or unregistered object: " + thing + " (class: " + thing.getClass() + ")");
     }
-
-    // --- String helpers ---
 
     private static String capitalize(String s) {
         if (s == null || s.isEmpty()) return s;
@@ -115,7 +104,6 @@ public class AllstarLanguageProvider extends LanguageProvider {
         return toTitleCase(path);
     }
 
-
     public <T> void addMissingRegistryTranslations(
             Class<?> registryClass,
             String type,                        // "item" or "block"
@@ -126,9 +114,8 @@ public class AllstarLanguageProvider extends LanguageProvider {
         for (Field field : registryClass.getDeclaredFields()) {
             try {
                 field.setAccessible(true);
-                Object obj = field.get(null); // static field
+                Object obj = field.get(null);
 
-                // Try to unwrap DeferredRegister types
                 if (obj != null && obj.getClass().getSimpleName().startsWith("Deferred")) {
                     try {
                         obj = obj.getClass().getMethod("get").invoke(obj);
@@ -155,9 +142,6 @@ public class AllstarLanguageProvider extends LanguageProvider {
             } catch (Exception ignored) {}
         }
     }
-
-
-
 
 
 
