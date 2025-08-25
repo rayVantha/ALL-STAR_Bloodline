@@ -4,6 +4,7 @@ import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.neoforge.event.server.ServerStartingEvent;
 import net.sievert.allstar.datagen.AllstarDataGenerator;
 import net.sievert.allstar.registry.AllstarCreativeModeTabs;
+import net.sievert.allstar.registry.AllstarEntities;
 import net.sievert.allstar.registry.AllstarItems;
 import org.slf4j.Logger;
 
@@ -11,7 +12,6 @@ import com.mojang.logging.LogUtils;
 
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.fml.common.Mod;
-import net.neoforged.fml.config.ModConfig;
 import net.neoforged.fml.ModContainer;
 import net.neoforged.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.neoforged.neoforge.common.NeoForge;
@@ -26,9 +26,10 @@ public class Allstar {
 
         AllstarItems.register(modEventBus);
         AllstarCreativeModeTabs.register(modEventBus);
+        AllstarEntities.register(modEventBus);
 
-        modEventBus.addListener(AllstarDataGenerator::gatherServerData);
         modEventBus.addListener(AllstarDataGenerator::gatherClientData);
+        modEventBus.addListener(AllstarDataGenerator::gatherServerData);
 
         NeoForge.EVENT_BUS.register(this);
     }

@@ -6,6 +6,7 @@ import net.neoforged.bus.api.IEventBus;
 import net.neoforged.neoforge.registries.DeferredItem;
 import net.neoforged.neoforge.registries.DeferredRegister;
 import net.sievert.allstar.Allstar;
+import net.sievert.allstar.world.item.StandArrowItem;
 
 public class AllstarItems {
 
@@ -14,7 +15,7 @@ public class AllstarItems {
 
     public static final DeferredItem<Item> STAND_ARROW = ITEMS.registerItem(
             "stand_arrow",
-            props -> new Item(props.rarity(Rarity.RARE))
+            props -> new StandArrowItem(props.rarity(Rarity.RARE))
     );
 
     public static void register(IEventBus eventBus) {

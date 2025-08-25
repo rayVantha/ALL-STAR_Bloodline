@@ -38,6 +38,10 @@ public class AllstarLanguageProvider extends LanguageProvider {
 
         addManual("itemGroup.allstar.allstar", "Allstar");
 
+        add("entity.allstar.stand_arrow", "Stand Arrow");
+
+        addManual("death.attack.stand_arrow_fail", "%1$s's soul was rejected by the Stand Arrow.");
+
         /*
 
         //Simple flipped entries
