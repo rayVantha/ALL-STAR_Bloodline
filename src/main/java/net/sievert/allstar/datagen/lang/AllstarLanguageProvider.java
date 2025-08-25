@@ -7,6 +7,7 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Item;
 import net.neoforged.neoforge.common.data.LanguageProvider;
 import net.neoforged.neoforge.registries.DeferredHolder;
+import net.sievert.allstar.registry.AllstarItems;
 
 import java.lang.reflect.Field;
 import java.util.HashSet;
@@ -24,16 +25,7 @@ public class AllstarLanguageProvider extends LanguageProvider {
     @Override
     protected void addTranslations() {
 
-        /*
 
-        //Examples
-
-        //Manual entries
-        addManual(AllstarItems.ExampleItem, "Example Item");
-
-
-        //Simple flipped entries
-        addManualFlipped(AllstarItems.ExampleItem);
 
         //Add rest using normal translation convention
         addMissingRegistryTranslations(
@@ -44,7 +36,15 @@ public class AllstarLanguageProvider extends LanguageProvider {
                 BuiltInRegistries.ITEM::getKey
         );
 
-         */
+        addManual("itemGroup.allstar.allstar", "Allstar");
+
+        /*
+
+        //Simple flipped entries
+        addManualFlipped(AllstarItems.ExampleItem);
+
+        */
+
     }
 
     //Helpers

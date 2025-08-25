@@ -3,6 +3,8 @@ package net.sievert.allstar;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.neoforge.event.server.ServerStartingEvent;
 import net.sievert.allstar.datagen.AllstarDataGenerator;
+import net.sievert.allstar.registry.AllstarCreativeModeTabs;
+import net.sievert.allstar.registry.AllstarItems;
 import org.slf4j.Logger;
 
 import com.mojang.logging.LogUtils;
@@ -21,6 +23,9 @@ public class Allstar {
 
     public Allstar(IEventBus modEventBus, ModContainer modContainer) {
         modEventBus.addListener(this::commonSetup);
+
+        AllstarItems.register(modEventBus);
+        AllstarCreativeModeTabs.register(modEventBus);
 
         modEventBus.addListener(AllstarDataGenerator::gatherServerData);
         modEventBus.addListener(AllstarDataGenerator::gatherClientData);
